@@ -1,3 +1,11 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="operator_width">45dp</dimen>
+    <dimen name="operator_height">45dp</dimen>
+    <dimen name="number_width">70dp</dimen>
+    <dimen name="number_height">90dp</dimen>
+    <dimen name="select_operator_icon_height">100dp</dimen>
+    <dimen name="select_operator_icon_width">100dp</dimen>
+
+
 </resources>

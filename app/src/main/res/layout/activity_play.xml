@@ -4,69 +4,98 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlayActivity">
+    tools:context=".PlayActivity"
+    tools:layout_editor_absoluteY="73dp">
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="94dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/image4" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="94dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        android:id="@+id/number1ImageView"
+        android:layout_width="@dimen/number_width"
+        android:layout_height="@dimen/number_height"
+        android:layout_marginTop="112dp"
+        app:layout_constraintEnd_toStartOf="@+id/operator1ImageView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/image1" />
+        app:srcCompat="@drawable/number4" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="94dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="80dp"
+        android:id="@+id/number2ImageView"
+        android:layout_width="@dimen/number_width"
+        android:layout_height="@dimen/number_height"
+        android:layout_marginTop="108dp"
+        app:layout_constraintEnd_toStartOf="@+id/operator2ImageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/operator1ImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/number4" />
+
+    <ImageView
+        android:id="@+id/number3ImageView"
+        android:layout_width="@dimen/number_width"
+        android:layout_height="@dimen/number_height"
+        android:layout_marginTop="108dp"
+        app:layout_constraintEnd_toStartOf="@+id/operator3ImageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/operator2ImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/number4" />
+
+    <ImageView
+        android:id="@+id/number4ImageView"
+        android:layout_width="@dimen/number_width"
+        android:layout_height="@dimen/number_height"
+        android:layout_marginTop="108dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintStart_toEndOf="@+id/operator3ImageView"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/image4" />
+        app:srcCompat="@drawable/number4" />
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="94dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        android:id="@+id/operator1ImageView"
+        android:layout_width="@dimen/operator_width"
+        android:layout_height="@dimen/operator_height"
+        android:layout_marginTop="132dp"
+        app:layout_constraintEnd_toStartOf="@+id/number2ImageView"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/number1ImageView"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/image4" />
+        app:srcCompat="@drawable/plus" />
+
+    <ImageView
+        android:id="@+id/operator2ImageView"
+        android:layout_width="@dimen/operator_width"
+        android:layout_height="@dimen/operator_height"
+        android:layout_marginTop="132dp"
+        app:layout_constraintEnd_toStartOf="@+id/number3ImageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/number2ImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/plus" />
+
+    <ImageView
+        android:id="@+id/operator3ImageView"
+        android:layout_width="@dimen/operator_width"
+        android:layout_height="@dimen/operator_height"
+        android:layout_marginTop="132dp"
+        app:layout_constraintEnd_toStartOf="@+id/number4ImageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/number3ImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/plus" />
 
     <Button
         android:id="@+id/evaluateBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="Evaluate"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/evaluateBtnTest"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintStart_toStartOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

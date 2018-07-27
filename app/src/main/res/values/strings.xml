@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Game of Arithmetic</string>
     <string name="title_activity_play">Let's Play</string>
+    <string name="evaluateBtnTest">Evaluate</string>
 </resources>
