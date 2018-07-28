@@ -8,20 +8,31 @@ public class Sequence {
     private int result;
     private int[] numbers;
     private char[] operators;
-    public static Map<Character, Operator> operatorInterpretation = new HashMap<Character, Operator>(){
+    public static final Map<Character, Operator> operatorInterpretation = new HashMap<Character, Operator>(){
         {
             put('+', (a,b) -> a + b);
             put('-', ((a, b) -> a - b));
-            put('*', ((a, b) -> a*b));
+            put('x', ((a, b) -> a*b));
         }
     };
 
-    public Sequence(int result, int[] numbers, char[] operators){
-        this.result = result;
+    public Sequence(int[] numbers, char[] operators){
         this.numbers = numbers;
         this.operators = operators;
+        this.result = evaluate();
 
+    }
 
+    public int getResult() {
+        return result;
+    }
+
+    public int[] getNumbers() {
+        return numbers;
+    }
+
+    public void submitNewOperators(char[] newOperatos){
+        this.operators = newOperatos;
     }
 
     public int evaluate(){

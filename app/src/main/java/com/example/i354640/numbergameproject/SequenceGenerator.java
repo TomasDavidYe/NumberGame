@@ -7,8 +7,9 @@ public class SequenceGenerator {
 
     public Sequence generateSequence(){
 
-
-        return null;
+        int[] nums = new int[]{3,4,5,8};
+        char[] operators = new char[] {'x', '-', 'x'};
+        return new Sequence(nums,operators);
     }
 
 }
