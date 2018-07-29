@@ -53,7 +53,7 @@ public class PlayActivity extends AppCompatActivity {
 
         //generating a sequence and a result;
         SequenceGenerator sequenceGenerator = new SequenceGenerator();
-        Sequence sequence = sequenceGenerator.generateSequence(0);
+        Sequence sequence = sequenceGenerator.generateSequence();
         //update the displayed sequence for the first time
         int sequenceLength = numberImageViews.length;
         updateSequence(operatorImageViews,numberImageViews, sequence, sequenceLength);
@@ -87,7 +87,7 @@ public class PlayActivity extends AppCompatActivity {
                 .show();
             }
             //after evaluation, update view with a newly generated sequence
-            updateSequence(operatorImageViews, numberImageViews,sequenceGenerator.generateSequence(1) ,sequenceLength);
+            updateSequence(operatorImageViews, numberImageViews,sequenceGenerator.generateSequence() ,sequenceLength);
 
         });
 
