@@ -17,7 +17,7 @@ import java.util.Map;
 public class PlayActivity extends AppCompatActivity {
 
     //mapping numbers to their images
-    public static final Map<Integer,Integer> numberToImage = new HashMap<Integer, Integer>(){
+    private static final Map<Integer,Integer> numberToImage = new HashMap<Integer, Integer>(){
         {
             put(1,R.drawable.number1);
             put(2,R.drawable.number2);
@@ -35,9 +35,7 @@ public class PlayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-        //generating a sequence and a result;
-        SequenceGenerator sequenceGenerator = new SequenceGenerator();
-        Sequence sequence = sequenceGenerator.generateSequence();
+
         //Creating references to number and operator image views
         ImageView[] operatorImageViews = new ImageView[]{
                 findViewById(R.id.operator1ImageView),
@@ -53,7 +51,52 @@ public class PlayActivity extends AppCompatActivity {
                 findViewById(R.id.number4ImageView)
         };
 
+        //generating a sequence and a result;
+        SequenceGenerator sequenceGenerator = new SequenceGenerator();
+        Sequence sequence = sequenceGenerator.generateSequence(0);
+        //update the displayed sequence for the first time
         int sequenceLength = numberImageViews.length;
+        updateSequence(operatorImageViews,numberImageViews, sequence, sequenceLength);
+
+
+
+
+        ((Button) findViewById(R.id.evaluateBtn)).setOnClickListener(view -> {
+            char[] submittedOperators = new char[sequenceLength -1];
+            for(int i = 0; i < sequenceLength - 1; i++){
+                submittedOperators[i] = (char) operatorImageViews[i].getTag();
+            }
+            //check if all operators are assigned
+            boolean operatorCheck = true;
+            for (int i = 0; i <sequenceLength-1; i++){
+                if(submittedOperators[i] == '?') operatorCheck = false;
+            }
+            //error if missing operators
+            if(!operatorCheck){
+                Toast.makeText(this,"Some operators are not assigned!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            sequence.submitNewOperators(submittedOperators);
+            int playerResult = sequence.evaluate();
+
+            if(playerResult == sequence.getResult()){
+                Toast.makeText(this, "Well done!!!", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(this, "Incorrect, you result is " + playerResult, Toast.LENGTH_SHORT)
+                .show();
+            }
+            //after evaluation, update view with a newly generated sequence
+            updateSequence(operatorImageViews, numberImageViews,sequenceGenerator.generateSequence(1) ,sequenceLength);
+
+        });
+
+
+    }
+
+    protected void updateSequence(ImageView[] operatorImageViews, ImageView[] numberImageViews, Sequence sequence, int sequenceLength ){
+
+
         int wantedResult = sequence.getResult();
         ((TextView) findViewById(R.id.goalNumTextView)).setText("Goal = " + wantedResult);
         //initializing operator image views
@@ -103,37 +146,6 @@ public class PlayActivity extends AppCompatActivity {
             operatorImageView.setOnClickListener(operatorOnClickListener);
             operatorImageView.setTag('?');
         }
-
-
-        //Exception handling needs to get done!!!!
-        ((Button) findViewById(R.id.evaluateBtn)).setOnClickListener(view -> {
-            char[] submittedOperators = new char[sequenceLength -1];
-            for(int i = 0; i < sequenceLength - 1; i++){
-                submittedOperators[i] = (char) operatorImageViews[i].getTag();
-            }
-            //check if all operators are assigned
-            boolean operatorCheck = true;
-            for (int i = 0; i <sequenceLength-1; i++){
-                if(submittedOperators[i] == '?') operatorCheck = false;
-            }
-            //error if missing operators
-            if(!operatorCheck){
-                Toast.makeText(this,"Some operators are not assigned!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            sequence.submitNewOperators(submittedOperators);
-            int playerResult = sequence.evaluate();
-
-            if(playerResult == wantedResult){
-                Toast.makeText(this, "Well done!!!", Toast.LENGTH_LONG).show();
-            }else{
-                Toast.makeText(this, "Incorrect, you result is " + playerResult, Toast.LENGTH_SHORT)
-                .show();
-            }
-        });
-
-
     }
 
 
