@@ -11,13 +11,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class PlayActivity extends AppCompatActivity {
 
     //mapping numbers to their images
-    private static final Map<Integer,Integer> numberToImage = new HashMap<Integer, Integer>(){
+    private final Map<Integer,Integer> numberToImage = new HashMap<Integer, Integer>(){
         {
             put(1,R.drawable.number1);
             put(2,R.drawable.number2);
@@ -30,6 +34,19 @@ public class PlayActivity extends AppCompatActivity {
             put(9,R.drawable.number9);
         }
     };
+
+    private final Map<Character,Integer> operatorToImage = new HashMap<Character, Integer>(){
+        {
+            put('+', R.drawable.plus);
+            put('-', R.drawable.minus);
+            put('x', R.drawable.times);
+            put('?', R.drawable.question);
+        }
+    };
+    private int wantedResult;
+    private int[] numbers;
+    private char[] generatedOperators;
+    private char[] userOperators;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,61 +68,63 @@ public class PlayActivity extends AppCompatActivity {
                 findViewById(R.id.number4ImageView)
         };
 
-        //generating a sequence and a result;
-        SequenceGenerator sequenceGenerator = new SequenceGenerator();
-        Sequence sequence = sequenceGenerator.generateSequence();
-        //update the displayed sequence for the first time
-        int sequenceLength = numberImageViews.length;
-        updateSequence(operatorImageViews,numberImageViews, sequence, sequenceLength);
+        if(savedInstanceState == null){
+            //first iteration, generating new sequence from scratch
+            numbers = generateNumbers();
+            generatedOperators = generateOperators();
+            userOperators = new char[] {'?', '?', '?'};
 
+        }
+        else{
+            numbers = savedInstanceState.getIntArray("numbers");
+            userOperators = savedInstanceState.getCharArray("userOperators");
+            generatedOperators = savedInstanceState.getCharArray("generatedOperators");
+        }
+        wantedResult = evaluate(numbers,generatedOperators);
+        for(int i = 0; i<3;i++) operatorImageViews[i].setTag(i);
+        updateSequence(operatorImageViews,numberImageViews);
 
 
 
         ((Button) findViewById(R.id.evaluateBtn)).setOnClickListener(view -> {
-            char[] submittedOperators = new char[sequenceLength -1];
-            for(int i = 0; i < sequenceLength - 1; i++){
-                submittedOperators[i] = (char) operatorImageViews[i].getTag();
-            }
-            //check if all operators are assigned
-            boolean operatorCheck = true;
-            for (int i = 0; i <sequenceLength-1; i++){
-                if(submittedOperators[i] == '?') operatorCheck = false;
-            }
-            //error if missing operators
-            if(!operatorCheck){
-                Toast.makeText(this,"Some operators are not assigned!", Toast.LENGTH_SHORT).show();
-                return;
-            }
 
-            sequence.submitNewOperators(submittedOperators);
-            int playerResult = sequence.evaluate();
+            boolean operatorCheck = checkIfAllOperatorsAssigned();
 
-            if(playerResult == sequence.getResult()){
-                Toast.makeText(this, "Well done!!!", Toast.LENGTH_LONG).show();
-            }else{
-                Toast.makeText(this, "Incorrect, you result is " + playerResult, Toast.LENGTH_SHORT)
-                .show();
+            if(operatorCheck) {
+                int playerResult = evaluate(numbers,userOperators);
+                if (playerResult == wantedResult) {
+                    Toast.makeText(this, "Well done!!!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Incorrect, you result is " + playerResult, Toast.LENGTH_SHORT)
+                            .show();
+                }
+                //after evaluation, update view with a newly generated sequence
+                updateSequence(operatorImageViews, numberImageViews);
+            } else{
+                Toast.makeText(this, "Not all operators are assigned", Toast.LENGTH_SHORT).show();
             }
-            //after evaluation, update view with a newly generated sequence
-            updateSequence(operatorImageViews, numberImageViews,sequenceGenerator.generateSequence() ,sequenceLength);
 
         });
 
 
     }
 
-    protected void updateSequence(ImageView[] operatorImageViews, ImageView[] numberImageViews, Sequence sequence, int sequenceLength ){
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putIntArray("numbers",numbers);
+        outState.putCharArray("userOperators", userOperators);
+        outState.putCharArray("generatedOperators", generatedOperators);
+        super.onSaveInstanceState(outState);
+    }
+
+    protected void updateSequence(ImageView[] operatorImageViews, ImageView[] numberImageViews){
 
 
-        int wantedResult = sequence.getResult();
         ((TextView) findViewById(R.id.goalNumTextView)).setText("Goal = " + wantedResult);
         //initializing operator image views
-        for (ImageView operatorImageView: operatorImageViews) {
-            operatorImageView.setImageResource(R.drawable.question);
-        }
+
         //initializing number image views
-        int[] numbers = sequence.getNumbers();
-        for(int i = 0; i < sequenceLength; i++){
+        for(int i = 0; i < 4; i++){
             numberImageViews[i].setImageResource(numberToImage.get(numbers[i]));
         }
 
@@ -122,18 +141,22 @@ public class PlayActivity extends AppCompatActivity {
             chooseOperatorDialog.findViewById(R.id.selectMinusImageView).setOnClickListener(view1 -> {
                 operatorImageView.setImageResource(R.drawable.minus);
                 operatorImageView.setTag('-');
+                updateUserOperators(operatorImageViews);
                 chooseOperatorDialog.cancel();
             });
 
             chooseOperatorDialog.findViewById(R.id.selectPlusImageView).setOnClickListener(view1 -> {
                 operatorImageView.setImageResource(R.drawable.plus);
                 operatorImageView.setTag('+');
+                updateUserOperators(operatorImageViews);
                 chooseOperatorDialog.cancel();
+
             });
 
             chooseOperatorDialog.findViewById(R.id.selectTimesImageView).setOnClickListener(view1 -> {
                 operatorImageView.setImageResource(R.drawable.times);
                 operatorImageView.setTag('x');
+                updateUserOperators(operatorImageViews);
                 chooseOperatorDialog.cancel();
             });
 
@@ -141,11 +164,61 @@ public class PlayActivity extends AppCompatActivity {
 
         };
 
-        for (ImageView operatorImageView: operatorImageViews) {
+
+        for (int i = 0; i < 3; i++) {
+            ImageView operatorImageView = operatorImageViews[i];
             operatorImageView.setClickable(true);
             operatorImageView.setOnClickListener(operatorOnClickListener);
-            operatorImageView.setTag('?');
+            char operatorSign = userOperators[i];
+            int pictureId = operatorToImage.get(operatorSign);
+            operatorImageView.setImageResource(pictureId);
+            operatorImageView.setTag(operatorSign);
+
         }
+    }
+
+    protected int[] generateNumbers(){
+        return new int[]{3,4,5,8};
+    }
+
+    protected char[] generateOperators(){
+        return new char[] {'x', '-', 'x'};
+    }
+
+    private int evaluate(int[] numbers, char[] operators){
+        Map<Character, Operator> operatorInterpretation = new HashMap<Character, Operator>(){
+            {
+                put('+', (a,b) -> a + b);
+                put('-', ((a, b) -> a - b));
+                put('x', ((a, b) -> a*b));
+            }
+        };
+
+
+        int temp = numbers[0];
+        int length = operators.length;
+        for(int i = 0; i < length; i++){
+            char operatorSign = operators[i];
+            Operator operator = operatorInterpretation.get(operatorSign);
+            int nextNum = numbers[i + 1];
+            temp = operator.Operation(temp, nextNum);
+        }
+
+        return temp;
+    }
+
+    private void updateUserOperators(ImageView[] operatorImageViews){
+        for(int i = 0; i<3;i++){
+            userOperators[i] = (char) operatorImageViews[i].getTag();
+        }
+    }
+
+    private boolean checkIfAllOperatorsAssigned(){
+        return !(new String(userOperators)).contains("?");
+    }
+
+    interface Operator {
+        int Operation(int a, int b);
     }
 
 
