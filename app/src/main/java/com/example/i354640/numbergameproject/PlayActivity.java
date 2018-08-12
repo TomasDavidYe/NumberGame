@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -45,6 +46,7 @@ public class PlayActivity extends AppCompatActivity {
     };
     private int wantedResult;
     int score;
+    private final char[] unassignedOperators = new char[]{'?', '?', '?'};
     private int[] numbers;
     private char[] generatedOperators;
     private char[] userOperators;
@@ -55,7 +57,7 @@ public class PlayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
 
-        //Creating references to number and operator image views
+        //Creating references to number and operator image views and the score screen text view
         ImageView[] operatorImageViews = new ImageView[]{
                 findViewById(R.id.operator1ImageView),
                 findViewById(R.id.operator2ImageView),
@@ -76,20 +78,19 @@ public class PlayActivity extends AppCompatActivity {
             //first iteration, generating new sequence from scratch
             numbers = generateNumbers();
             generatedOperators = generateOperators();
-            userOperators = new char[] {'?', '?', '?'};
+            userOperators = unassignedOperators.clone();
             score = 0;
 
         }
         else{
+            //reloading the state from a previous one, maybe because of screen rotation
             numbers = savedInstanceState.getIntArray("numbers");
             userOperators = savedInstanceState.getCharArray("userOperators");
             generatedOperators = savedInstanceState.getCharArray("generatedOperators");
             score = savedInstanceState.getInt("score");
         }
-        wantedResult = evaluate(numbers,generatedOperators);
         for(int i = 0; i<3;i++) operatorImageViews[i].setTag(i);
         updateSequence(operatorImageViews,numberImageViews, scoreScreen);
-        updateScoreScreen(scoreScreen);
 
 
 
@@ -114,9 +115,6 @@ public class PlayActivity extends AppCompatActivity {
                                   ImageView[] numberImageViews,
                                   TextView scoreScreen )
     {
-        ((TextView) findViewById(R.id.goalNumTextView)).setText("Goal = " + wantedResult);
-        //initializing operator image views
-
         //initializing number image views
         for(int i = 0; i < 4; i++){
             numberImageViews[i].setImageResource(numberToImage.get(numbers[i]));
@@ -136,14 +134,36 @@ public class PlayActivity extends AppCompatActivity {
             operatorImageView.setTag(operatorSign);
 
         }
+        updateScoreScreen(scoreScreen);
+        wantedResult = evaluate(numbers,generatedOperators);
+        ((TextView) findViewById(R.id.goalNumTextView)).setText("Goal = " + wantedResult);
     }
 
     protected int[] generateNumbers(){
-        return new int[]{3,4,5,8};
+        Random numGen = new Random();
+
+        return new int[]{
+                numGen.nextInt(9) + 1,
+                numGen.nextInt(9) + 1,
+                numGen.nextInt(9) + 1,
+                numGen.nextInt(9) + 1
+        };
     }
 
     protected char[] generateOperators(){
-        return new char[] {'x', '-', 'x'};
+        Random numGen = new Random();
+        Map<Integer, Character> numToChar = new HashMap<Integer, Character>(){
+            {
+                put(0, '+');
+                put(1, '-');
+                put(2, 'x');
+            }
+        };
+        return new char[] {
+                numToChar.get(numGen.nextInt(3)),
+                numToChar.get(numGen.nextInt(3)),
+                numToChar.get(numGen.nextInt(3))
+        };
     }
 
     private int evaluate(int[] numbers, char[] operators){
@@ -200,6 +220,10 @@ public class PlayActivity extends AppCompatActivity {
                     Toast.makeText(this, "Incorrect, you result is " + playerResult, Toast.LENGTH_SHORT)
                             .show();
                 }
+                numbers = generateNumbers();
+                generatedOperators = generateOperators();
+                userOperators = unassignedOperators.clone();
+                updateSequence(operatorImageViews,numberImageViews, scoreScreen);
             } else{
                 Toast.makeText(this, "Not all operators are assigned", Toast.LENGTH_SHORT).show();
             }
