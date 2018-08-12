@@ -44,9 +44,11 @@ public class PlayActivity extends AppCompatActivity {
         }
     };
     private int wantedResult;
+    int score;
     private int[] numbers;
     private char[] generatedOperators;
     private char[] userOperators;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,21 +70,27 @@ public class PlayActivity extends AppCompatActivity {
                 findViewById(R.id.number4ImageView)
         };
 
+        TextView scoreScreen = findViewById(R.id.scoreTextView);
+
         if(savedInstanceState == null){
             //first iteration, generating new sequence from scratch
             numbers = generateNumbers();
             generatedOperators = generateOperators();
             userOperators = new char[] {'?', '?', '?'};
+            score = 0;
 
         }
         else{
             numbers = savedInstanceState.getIntArray("numbers");
             userOperators = savedInstanceState.getCharArray("userOperators");
             generatedOperators = savedInstanceState.getCharArray("generatedOperators");
+            score = savedInstanceState.getInt("score");
         }
         wantedResult = evaluate(numbers,generatedOperators);
         for(int i = 0; i<3;i++) operatorImageViews[i].setTag(i);
         updateSequence(operatorImageViews,numberImageViews);
+        updateScoreScreen(scoreScreen);
+
 
 
 
@@ -94,12 +102,12 @@ public class PlayActivity extends AppCompatActivity {
                 int playerResult = evaluate(numbers,userOperators);
                 if (playerResult == wantedResult) {
                     Toast.makeText(this, "Well done!!!", Toast.LENGTH_SHORT).show();
+                    score++;
+                    updateScoreScreen(scoreScreen);
                 } else {
                     Toast.makeText(this, "Incorrect, you result is " + playerResult, Toast.LENGTH_SHORT)
                             .show();
                 }
-                //after evaluation, update view with a newly generated sequence
-                updateSequence(operatorImageViews, numberImageViews);
             } else{
                 Toast.makeText(this, "Not all operators are assigned", Toast.LENGTH_SHORT).show();
             }
@@ -114,6 +122,7 @@ public class PlayActivity extends AppCompatActivity {
         outState.putIntArray("numbers",numbers);
         outState.putCharArray("userOperators", userOperators);
         outState.putCharArray("generatedOperators", generatedOperators);
+        outState.putInt("score", score);
         super.onSaveInstanceState(outState);
     }
 
@@ -215,6 +224,10 @@ public class PlayActivity extends AppCompatActivity {
 
     private boolean checkIfAllOperatorsAssigned(){
         return !(new String(userOperators)).contains("?");
+    }
+
+    private void updateScoreScreen(TextView scoreScreen){
+        scoreScreen.setText("Score =  " + score);
     }
 
     interface Operator {
