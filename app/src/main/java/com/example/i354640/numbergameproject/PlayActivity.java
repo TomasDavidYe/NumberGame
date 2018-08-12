@@ -88,31 +88,15 @@ public class PlayActivity extends AppCompatActivity {
         }
         wantedResult = evaluate(numbers,generatedOperators);
         for(int i = 0; i<3;i++) operatorImageViews[i].setTag(i);
-        updateSequence(operatorImageViews,numberImageViews);
+        updateSequence(operatorImageViews,numberImageViews, scoreScreen);
         updateScoreScreen(scoreScreen);
 
 
 
 
-        ((Button) findViewById(R.id.evaluateBtn)).setOnClickListener(view -> {
-
-            boolean operatorCheck = checkIfAllOperatorsAssigned();
-
-            if(operatorCheck) {
-                int playerResult = evaluate(numbers,userOperators);
-                if (playerResult == wantedResult) {
-                    Toast.makeText(this, "Well done!!!", Toast.LENGTH_SHORT).show();
-                    score++;
-                    updateScoreScreen(scoreScreen);
-                } else {
-                    Toast.makeText(this, "Incorrect, you result is " + playerResult, Toast.LENGTH_SHORT)
-                            .show();
-                }
-            } else{
-                Toast.makeText(this, "Not all operators are assigned", Toast.LENGTH_SHORT).show();
-            }
-
-        });
+        ((Button) findViewById(R.id.evaluateBtn)).setOnClickListener(createEvaluateBtnListener(
+                operatorImageViews, numberImageViews, scoreScreen
+        ));
 
 
     }
@@ -126,9 +110,10 @@ public class PlayActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
-    protected void updateSequence(ImageView[] operatorImageViews, ImageView[] numberImageViews){
-
-
+    protected void updateSequence(ImageView[] operatorImageViews,
+                                  ImageView[] numberImageViews,
+                                  TextView scoreScreen )
+    {
         ((TextView) findViewById(R.id.goalNumTextView)).setText("Goal = " + wantedResult);
         //initializing operator image views
 
@@ -138,40 +123,7 @@ public class PlayActivity extends AppCompatActivity {
         }
 
         //Here is the onClickListener common for all operator windows
-        View.OnClickListener operatorOnClickListener = ( view ) -> {
-            AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-            View mView = getLayoutInflater().inflate(R.layout.layout_select_operator, null);
-            mBuilder.setView(mView);
-            AlertDialog chooseOperatorDialog = mBuilder.create();
-            chooseOperatorDialog.show();
-            ImageView operatorImageView = findViewById(view.getId());
-
-            //here we set up onclick listeners for the operator signs in the dialog that opens up
-            chooseOperatorDialog.findViewById(R.id.selectMinusImageView).setOnClickListener(view1 -> {
-                operatorImageView.setImageResource(R.drawable.minus);
-                operatorImageView.setTag('-');
-                updateUserOperators(operatorImageViews);
-                chooseOperatorDialog.cancel();
-            });
-
-            chooseOperatorDialog.findViewById(R.id.selectPlusImageView).setOnClickListener(view1 -> {
-                operatorImageView.setImageResource(R.drawable.plus);
-                operatorImageView.setTag('+');
-                updateUserOperators(operatorImageViews);
-                chooseOperatorDialog.cancel();
-
-            });
-
-            chooseOperatorDialog.findViewById(R.id.selectTimesImageView).setOnClickListener(view1 -> {
-                operatorImageView.setImageResource(R.drawable.times);
-                operatorImageView.setTag('x');
-                updateUserOperators(operatorImageViews);
-                chooseOperatorDialog.cancel();
-            });
-
-
-
-        };
+        View.OnClickListener operatorOnClickListener =  createChooseOperatorBtnListener(operatorImageViews, numberImageViews, scoreScreen);
 
 
         for (int i = 0; i < 3; i++) {
@@ -228,6 +180,71 @@ public class PlayActivity extends AppCompatActivity {
 
     private void updateScoreScreen(TextView scoreScreen){
         scoreScreen.setText("Score =  " + score);
+    }
+
+    private View.OnClickListener createEvaluateBtnListener(ImageView[] operatorImageViews,
+                                                           ImageView[] numberImageViews,
+                                                           TextView scoreScreen)
+    {
+        return (view -> {
+
+            boolean operatorCheck = checkIfAllOperatorsAssigned();
+
+            if(operatorCheck) {
+                int playerResult = evaluate(numbers,userOperators);
+                if (playerResult == wantedResult) {
+                    Toast.makeText(this, "Well done!!!", Toast.LENGTH_SHORT).show();
+                    score++;
+                    updateScoreScreen(scoreScreen);
+                } else {
+                    Toast.makeText(this, "Incorrect, you result is " + playerResult, Toast.LENGTH_SHORT)
+                            .show();
+                }
+            } else{
+                Toast.makeText(this, "Not all operators are assigned", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+    }
+
+    private View.OnClickListener createChooseOperatorBtnListener(ImageView[] operatorImageViews,
+                                                                 ImageView[] numberImageViews,
+                                                                 TextView scoreScreen){
+        return (view  -> {
+            AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+            View mView = getLayoutInflater().inflate(R.layout.layout_select_operator, null);
+            mBuilder.setView(mView);
+            AlertDialog chooseOperatorDialog = mBuilder.create();
+            chooseOperatorDialog.show();
+            ImageView operatorImageView = findViewById(view.getId());
+
+            //here we set up onclick listeners for the operator signs in the dialog that opens up
+            chooseOperatorDialog.findViewById(R.id.selectMinusImageView).setOnClickListener(view1 -> {
+                operatorImageView.setImageResource(R.drawable.minus);
+                operatorImageView.setTag('-');
+                updateUserOperators(operatorImageViews);
+                chooseOperatorDialog.cancel();
+            });
+
+            chooseOperatorDialog.findViewById(R.id.selectPlusImageView).setOnClickListener(view1 -> {
+                operatorImageView.setImageResource(R.drawable.plus);
+                operatorImageView.setTag('+');
+                updateUserOperators(operatorImageViews);
+                chooseOperatorDialog.cancel();
+
+            });
+
+            chooseOperatorDialog.findViewById(R.id.selectTimesImageView).setOnClickListener(view1 -> {
+                operatorImageView.setImageResource(R.drawable.times);
+                operatorImageView.setTag('x');
+                updateUserOperators(operatorImageViews);
+                chooseOperatorDialog.cancel();
+            });
+
+
+
+        });
     }
 
     interface Operator {

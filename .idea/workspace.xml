@@ -11,13 +11,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/i354640/numbergameproject/PlayActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/i354640/numbergameproject/PlayActivity.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_play.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_play.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,17 +41,18 @@
       <file leaf-file-name="PlayActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/i354640/numbergameproject/PlayActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="229" column="42" lean-forward="false" selection-start-line="229" selection-start-column="42" selection-end-line="229" selection-end-column="42" />
+            <state relative-caret-position="478">
+              <caret line="90" column="71" lean-forward="false" selection-start-line="90" selection-start-column="71" selection-end-line="90" selection-end-column="71" />
               <folding>
                 <element signature="method#updateSequence#0;class#PlayActivity#0" expanded="false" />
-                <element signature="e#4860#6387#0" expanded="false" />
-                <element signature="e#6898#6899#0" expanded="true" />
-                <element signature="e#6939#6940#0" expanded="true" />
-                <element signature="e#6982#6983#0" expanded="true" />
-                <element signature="e#7031#7032#0" expanded="true" />
+                <element signature="e#4938#4939#0" expanded="true" />
+                <element signature="e#4979#4980#0" expanded="true" />
+                <element signature="e#5022#5023#0" expanded="true" />
+                <element signature="e#5071#5072#0" expanded="true" />
                 <element signature="method#evaluate#0;class#PlayActivity#0" expanded="false" />
                 <element signature="method#updateUserOperators#0;class#PlayActivity#0" expanded="false" />
+                <element signature="method#createEvaluateBtnListener#0;class#PlayActivity#0" expanded="false" />
+                <element signature="e#7501#9025#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -2395,7 +2394,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2406,7 +2404,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2417,7 +2415,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -3142,13 +3140,14 @@
           <caret line="75" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
           <folding>
             <element signature="method#updateSequence#0;class#PlayActivity#0" expanded="false" />
-            <element signature="e#4860#6387#0" expanded="false" />
-            <element signature="e#6898#6899#0" expanded="true" />
-            <element signature="e#6939#6940#0" expanded="true" />
-            <element signature="e#6982#6983#0" expanded="true" />
-            <element signature="e#7031#7032#0" expanded="true" />
+            <element signature="e#4938#4939#0" expanded="true" />
+            <element signature="e#4979#4980#0" expanded="true" />
+            <element signature="e#5022#5023#0" expanded="true" />
+            <element signature="e#5071#5072#0" expanded="true" />
             <element signature="method#evaluate#0;class#PlayActivity#0" expanded="false" />
             <element signature="method#updateUserOperators#0;class#PlayActivity#0" expanded="false" />
+            <element signature="method#createEvaluateBtnListener#0;class#PlayActivity#0" expanded="false" />
+            <element signature="e#7501#9025#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3856,13 +3855,14 @@
           <caret line="43" column="52" lean-forward="false" selection-start-line="43" selection-start-column="52" selection-end-line="43" selection-end-column="52" />
           <folding>
             <element signature="method#updateSequence#0;class#PlayActivity#0" expanded="false" />
-            <element signature="e#4860#6387#0" expanded="false" />
-            <element signature="e#6898#6899#0" expanded="true" />
-            <element signature="e#6939#6940#0" expanded="true" />
-            <element signature="e#6982#6983#0" expanded="true" />
-            <element signature="e#7031#7032#0" expanded="true" />
+            <element signature="e#4938#4939#0" expanded="true" />
+            <element signature="e#4979#4980#0" expanded="true" />
+            <element signature="e#5022#5023#0" expanded="true" />
+            <element signature="e#5071#5072#0" expanded="true" />
             <element signature="method#evaluate#0;class#PlayActivity#0" expanded="false" />
             <element signature="method#updateUserOperators#0;class#PlayActivity#0" expanded="false" />
+            <element signature="method#createEvaluateBtnListener#0;class#PlayActivity#0" expanded="false" />
+            <element signature="e#7501#9025#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3930,13 +3930,14 @@
           <caret line="164" column="18" lean-forward="false" selection-start-line="164" selection-start-column="18" selection-end-line="164" selection-end-column="18" />
           <folding>
             <element signature="method#updateSequence#0;class#PlayActivity#0" expanded="false" />
-            <element signature="e#4860#6387#0" expanded="false" />
-            <element signature="e#6898#6899#0" expanded="true" />
-            <element signature="e#6939#6940#0" expanded="true" />
-            <element signature="e#6982#6983#0" expanded="true" />
-            <element signature="e#7031#7032#0" expanded="true" />
+            <element signature="e#4938#4939#0" expanded="true" />
+            <element signature="e#4979#4980#0" expanded="true" />
+            <element signature="e#5022#5023#0" expanded="true" />
+            <element signature="e#5071#5072#0" expanded="true" />
             <element signature="method#evaluate#0;class#PlayActivity#0" expanded="false" />
             <element signature="method#updateUserOperators#0;class#PlayActivity#0" expanded="false" />
+            <element signature="method#createEvaluateBtnListener#0;class#PlayActivity#0" expanded="false" />
+            <element signature="e#7501#9025#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3958,13 +3959,14 @@
           <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding>
             <element signature="method#updateSequence#0;class#PlayActivity#0" expanded="false" />
-            <element signature="e#4860#6387#0" expanded="false" />
-            <element signature="e#6898#6899#0" expanded="true" />
-            <element signature="e#6939#6940#0" expanded="true" />
-            <element signature="e#6982#6983#0" expanded="true" />
-            <element signature="e#7031#7032#0" expanded="true" />
+            <element signature="e#4938#4939#0" expanded="true" />
+            <element signature="e#4979#4980#0" expanded="true" />
+            <element signature="e#5022#5023#0" expanded="true" />
+            <element signature="e#5071#5072#0" expanded="true" />
             <element signature="method#evaluate#0;class#PlayActivity#0" expanded="false" />
             <element signature="method#updateUserOperators#0;class#PlayActivity#0" expanded="false" />
+            <element signature="method#createEvaluateBtnListener#0;class#PlayActivity#0" expanded="false" />
+            <element signature="e#7501#9025#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -4744,17 +4746,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/i354640/numbergameproject/PlayActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="229" column="42" lean-forward="false" selection-start-line="229" selection-start-column="42" selection-end-line="229" selection-end-column="42" />
+        <state relative-caret-position="478">
+          <caret line="90" column="71" lean-forward="false" selection-start-line="90" selection-start-column="71" selection-end-line="90" selection-end-column="71" />
           <folding>
             <element signature="method#updateSequence#0;class#PlayActivity#0" expanded="false" />
-            <element signature="e#4860#6387#0" expanded="false" />
-            <element signature="e#6898#6899#0" expanded="true" />
-            <element signature="e#6939#6940#0" expanded="true" />
-            <element signature="e#6982#6983#0" expanded="true" />
-            <element signature="e#7031#7032#0" expanded="true" />
+            <element signature="e#4938#4939#0" expanded="true" />
+            <element signature="e#4979#4980#0" expanded="true" />
+            <element signature="e#5022#5023#0" expanded="true" />
+            <element signature="e#5071#5072#0" expanded="true" />
             <element signature="method#evaluate#0;class#PlayActivity#0" expanded="false" />
             <element signature="method#updateUserOperators#0;class#PlayActivity#0" expanded="false" />
+            <element signature="method#createEvaluateBtnListener#0;class#PlayActivity#0" expanded="false" />
+            <element signature="e#7501#9025#0" expanded="false" />
           </folding>
         </state>
       </provider>
